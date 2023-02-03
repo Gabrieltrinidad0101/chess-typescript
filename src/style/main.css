@@ -1,0 +1,55 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.app{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.app > div{
+    width: 40vw;
+    height: 40vw;
+    display: grid;
+    grid-template-columns: repeat(8,80px);
+    grid-template-rows: repeat(8,80px);
+}
+
+.containerPieceAndPointPosition{
+    width: 100%;
+    height: 100%;
+    border: 1px solid #000;
+    
+}
+
+.pieceHtml{
+    width: 100%;
+    height: 100%;
+    font-size: 30px;
+    color: red;
+}
+
+.pointHtml{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    visibility: hidden;
+}
+
+.pointHtml::before{
+    content: "";
+    background: green;
+    padding-right:  20px;
+    position: relative;
+    border-radius: 50%;
+    left: 40%;
+    top: calc(-100% + 50% - 10px);
+}
+
+.color-black{
+    background: #000;
+}
