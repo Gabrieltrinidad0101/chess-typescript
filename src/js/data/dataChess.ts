@@ -18,6 +18,9 @@ export class DataChess {
             dataChess.push(row);
         }
         this.initial = {dataChess};
-        this.initial.dataChess[0][0] = {name: 'horse', team: "black",positionX: 0,positionY: 0, hadMovie: false};
+        const piece1 = this.initial.dataChess[3][5];
+        const piece2 = this.initial.dataChess[1][6];
+        piece1.name = 'horse';
+        piece2.name = 'horse';
     }
 }

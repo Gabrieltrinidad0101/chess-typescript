@@ -1,25 +1,39 @@
 import { PieceInterface } from "../data/types";
 import { PieceLogic } from "./PieceLogic";
-
+import { coordinatesType } from "./PieceTypes";
 export default class Piece{
 
     pieceLogic: PieceLogic;
     constructor(){
         this.pieceLogic = new PieceLogic();
+        this.pieceLogic.actionShowPoints = this.showPointsPosition;
+        window.addEventListener("click", _=> this.removeAllPointsPosition())
     }
 
     renderPiece(piece: PieceInterface): HTMLElement{
         const divPiece = document.createElement("div");
         divPiece.className = `pieceHtml color-${this.backgroundColor(piece.positionX, piece.positionY)}`;
         divPiece.textContent = piece.name;
-        divPiece.addEventListener("click",_=>this.addEvent(piece))
+        divPiece.addEventListener("click",e=>this.addEvent(e,piece))
         return divPiece;
     }
 
-    addEvent(piece: PieceInterface){
+    private removeAllPointsPosition(){
+        document.querySelectorAll(".pointHtml").forEach((pointHtml)=>{
+            pointHtml.setAttribute("style","visibility: hidden")
+        })
+    }
+    
+    private showPointsPosition(coordinatesType: coordinatesType) {
+        const pointPosition = <HTMLElement>document.querySelector(`.position-${coordinatesType.x}-${coordinatesType.y}`)
+        pointPosition?.setAttribute("style", "visibility: visible")
+    }
+    
+    addEvent(e: MouseEvent, piece: PieceInterface){
+        this.removeAllPointsPosition();
+        e.stopPropagation();
         const action = this.pieceLogic.actions.get(piece.name);
-        if(!action) return;
-        action(piece);
+        action && action(piece);
     }
 
     backgroundColor(positionX: number,positionY: number): string{

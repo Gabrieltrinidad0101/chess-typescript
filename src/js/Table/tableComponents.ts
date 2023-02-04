@@ -2,7 +2,6 @@ import { PieceInterface } from "../data/types";
 import Piece from "../Piece/Piece";
 import { pieceHtml } from "./types";
 
-const piece = new Piece()
 
 export const createRow = (row: Array<PieceInterface>, callBack: (pieceInterface: PieceInterface) => pieceHtml): HTMLElement => {
     const rowDiv: HTMLElement = document.createElement("div");
@@ -19,6 +18,7 @@ export const createRow = (row: Array<PieceInterface>, callBack: (pieceInterface:
 
 
 export const createPiece = (pieceInterface: PieceInterface): pieceHtml => {
+    const piece = new Piece()
     const divPiece = piece.renderPiece(pieceInterface);
     const pointPosition = document.createElement("div");
     pointPosition.className = `pointHtml position-${pieceInterface.positionX}-${pieceInterface.positionY}`
