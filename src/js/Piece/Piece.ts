@@ -11,6 +11,7 @@ export default class Piece{
     }
 
     renderPiece(piece: PieceInterface): HTMLElement{
+        this.pieceLogic.callAction(piece);
         const divPiece = document.createElement("div");
         divPiece.className = `pieceHtml color-${this.backgroundColor(piece.positionX, piece.positionY)}`;
         divPiece.textContent = piece.name;
@@ -32,8 +33,7 @@ export default class Piece{
     addEvent(e: MouseEvent, piece: PieceInterface){
         this.removeAllPointsPosition();
         e.stopPropagation();
-        const action = this.pieceLogic.actions.get(piece.name);
-        action && action(piece);
+        this.pieceLogic.showAttackPosition(piece);
     }
 
     backgroundColor(positionX: number,positionY: number): string{
