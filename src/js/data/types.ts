@@ -13,4 +13,6 @@ export type dataChess = Array<PieceInterface>;
 
 export interface InitialState{
     dataChess: Array<dataChess>,
+    pieceFocus?: PieceInterface,
+    turn: "white" | "black";
 }

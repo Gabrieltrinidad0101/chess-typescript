@@ -1,4 +1,5 @@
 import { PieceInterface } from "../data/types";
+import { renderTable } from "../Table/createTable";
 import { PieceLogic } from "./PieceLogic";
 import { coordinatesType } from "./PieceTypes";
 export default class Piece{
@@ -6,7 +7,7 @@ export default class Piece{
     pieceLogic: PieceLogic;
     constructor(){
         this.pieceLogic = new PieceLogic();
-        this.pieceLogic.actionShowPoints = this.showPointsPosition;
+        this.pieceLogic.actionShowPoints = this.showPointsPosition.bind(this);
         window.addEventListener("click", _=> this.removeAllPointsPosition())
     }
 
@@ -28,7 +29,12 @@ export default class Piece{
     private showPointsPosition(coordinatesType: coordinatesType) {
         const pointPosition = <HTMLElement>document.querySelector(`.position-${coordinatesType.x}-${coordinatesType.y}`)
         pointPosition?.setAttribute("style", "visibility: visible")
+        pointPosition?.addEventListener("click",_=>{
+            this.pieceLogic.movePiece(coordinatesType);
+            renderTable();
+        });
     }
+
     
     addEvent(e: MouseEvent, piece: PieceInterface){
         this.removeAllPointsPosition();
