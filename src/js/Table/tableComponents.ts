@@ -18,7 +18,7 @@ export const createRow = (row: Array<PieceInterface>, callBack: (pieceInterface:
 
 
 export const createPiece = (pieceInterface: PieceInterface): pieceHtml => {
-    const piece = new Piece()
+    const piece = new Piece();
     const divPiece = piece.renderPiece(pieceInterface);
     const pointPosition = document.createElement("div");
     pointPosition.className = `pointHtml position-${pieceInterface.positionX}-${pieceInterface.positionY}`
