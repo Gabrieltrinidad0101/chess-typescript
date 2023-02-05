@@ -22,7 +22,6 @@ export class Tower{
     }
 
     generateAttackPositionsTower(pieceInterface1: PieceInterface) {
-        this.analysisPositions.clearAttackPositions(pieceInterface1);
         this.getLineOfTowerAttack(pieceInterface1, 1, 0)
         this.getLineOfTowerAttack(pieceInterface1, -1, 0)
         this.getLineOfTowerAttack(pieceInterface1, 0, 1)

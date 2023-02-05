@@ -16,6 +16,7 @@ export class DataChess {
                     hadMovie: false,
                     team: "space",
                     attackPosition: [],
+                    canNoMoveToAttackPosition: false
                 })
             }
             dataChess.push(row);
@@ -33,12 +34,28 @@ export class DataChess {
         piece3.team = "white";
         piece4.name = "rey";
         piece4.team = "white";
+        piece1.canNoMoveToAttackPosition = true
 
     }
+
 
     static getPieceByPosition(coordinatesType: coordinatesType): PieceInterface | void {
         if (!this.initial?.dataChess) return;
         if (!this.initial.dataChess[coordinatesType.x]) return;
         return this.initial.dataChess[coordinatesType.x][coordinatesType.y];
+    }
+
+    static existAttackPosition(pieceInterface: PieceInterface,coordinatesType1: coordinatesType): boolean{
+        for(const row of this.initial.dataChess){
+            for(const pieceInterface of row){
+                if(pieceInterface.name == pieceInterface.name && pieceInterface.team)
+                for(const coordinatesType2 of pieceInterface.attackPosition ?? []){
+                    if(coordinatesType2.x == coordinatesType1.x && coordinatesType2.y == coordinatesType1.y ){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 }

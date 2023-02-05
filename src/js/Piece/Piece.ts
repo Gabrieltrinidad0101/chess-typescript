@@ -12,7 +12,7 @@ export default class Piece{
     }
 
     renderPiece(piece: PieceInterface): HTMLElement{
-        this.pieceLogic.callAction(piece);
+        this.pieceLogic.gerenerateAttackPositionsByPiece(piece);
         const divPiece = document.createElement("div");
         divPiece.className = `pieceHtml color-${this.backgroundColor(piece.positionX, piece.positionY)}`;
         divPiece.textContent = piece.name;

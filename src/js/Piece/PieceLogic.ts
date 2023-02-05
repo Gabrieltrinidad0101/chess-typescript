@@ -3,22 +3,27 @@ import { DataChess } from "../data/dataChess";
 import { actionShowPointsType, actionMethodType, coordinatesType } from "./PieceTypes";
 import { Horse } from "./attackPositions/horse";
 import { Tower } from "./attackPositions/tower";
+import { AnalysisPositions } from "./utils/analysisPositions";
+import { Rey } from "./attackPositions/rey";
 
 export class PieceLogic {
     horse: Horse= new Horse();
     tower: Tower= new Tower();
+    rey: Rey= new Rey();
+    analysisPositions: AnalysisPositions = new AnalysisPositions();
 
     actions: Map<string, actionMethodType> = new Map([
         ["horse", (pieceInterface: PieceInterface) => { this.horse.generateAttackPositionsHorse(pieceInterface) }],
         ["tower", (pieceInterface: PieceInterface) => { this.tower.generateAttackPositionsTower(pieceInterface) }],
-        ["rey", (pieceInterface: PieceInterface) => { this.generateAttackPositionsRey(pieceInterface) }]
+        ["rey", (pieceInterface: PieceInterface)   => { this.rey.generateAttackPositionsRey(pieceInterface) }]
     ]);
 
     
     actionShowPoints?: actionShowPointsType;
 
-    callAction(pieceInterface: PieceInterface) {
+    gerenerateAttackPositionsByPiece(pieceInterface: PieceInterface) {
         const action = this.actions.get(pieceInterface.name);
+        this.analysisPositions.clearAttackPositions(pieceInterface);
         action && action(pieceInterface);
     }
 
@@ -38,6 +43,7 @@ export class PieceLogic {
             hadMovie: false,
             team: "space",
             attackPosition: [],
+            canNoMoveToAttackPosition: false,
         };
     }
 
@@ -46,13 +52,11 @@ export class PieceLogic {
         if(DataChess.initial.turn !== pieceInterface.team) return;
         DataChess.initial.pieceFocus = pieceInterface;
         pieceInterface.attackPosition?.forEach((coordinatesType) => {
-            if (this.actionShowPoints === undefined) return;
+            if(pieceInterface.name === "rey"){
+                console.log(DataChess.existAttackPosition(coordinatesType))
+            }
+            if (this.actionShowPoints === undefined || DataChess.existAttackPosition(coordinatesType)) return;
             this.actionShowPoints(coordinatesType)
         })
     }
-
-
-    private showPointsPosition(listOfCoordinatesType?: Array<coordinatesType>) {
-    }
-    
 }
