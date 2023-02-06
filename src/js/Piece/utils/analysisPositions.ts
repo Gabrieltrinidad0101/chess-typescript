@@ -44,8 +44,7 @@ export class AnalysisPositions{
             y: (coordinatesType?.y ?? pieceInterface.positionY) + y,
         };
         const pieceInterface2 = DataChess.getPieceByPosition(coordinatesType1);
-        if(limit === 1) return;
-        if (pieceInterface2 == undefined || pieceNoAttack.includes(pieceInterface2?.team)) {
+        if (limit === 1 || pieceInterface2 == undefined || pieceInterface2.team === pieceInterface.team) {
             return;
         }
         pieceInterface.attackPosition?.push(coordinatesType1);

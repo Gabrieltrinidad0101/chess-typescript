@@ -4,13 +4,13 @@ import { coordinatesType } from "../Piece/PieceTypes";
 export class DataChess {
     static initial: InitialState;
     private static chess: Array<Array<BasicPieceInterface>> = [
-        [{name: "tower", team: "black"},{name: "pawn", team: "black"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "pawn", team: "white"},{name: "towe", team: "white"}],
-        [{name: "horse", team: "black"},{name: "pawn", team: "black"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "pawn", team: "white"},{name: "horse", team: "white"}],
-        [{name: "bishop", team: "black"},{name: "pawn", team: "black"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "pawn", team: "white"},{name: "bishop", team: "white"}],
-        [{name: "rey", team: "black"},{name: "pawn", team: "black"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "pawn", team: "white"},{name: "rey", team: "white"}],
-        [{name: "lady", team: "black"},{name: "pawn", team: "black"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "pawn", team: "white"},{name: "lady", team: "white"}],
-        [{name: "bishop", team: "black"},{name: "pawn", team: "black"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "pawn", team: "white"},{name: "bishop", team: "white"}],
-        [{name: "horse", team: "black"},{name: "pawn", team: "black"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "pawn", team: "white"},{name: "horse", team: "white"}],
+        //[{name: "tower", team: "black"},{name: "pawn", team: "black"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "pawn", team: "white"},{name: "towe", team: "white"}],
+        //[{name: "horse", team: "black"},{name: "pawn", team: "black"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "pawn", team: "white"},{name: "horse", team: "white"}],
+        //[{name: "bishop", team: "black"},{name: "pawn", team: "black"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "pawn", team: "white"},{name: "bishop", team: "white"}],
+        //[{name: "rey", team: "black"},{name: "pawn", team: "black"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "pawn", team: "white"},{name: "rey", team: "white"}],
+        //[{name: "lady", team: "black"},{name: "pawn", team: "black"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "pawn", team: "white"},{name: "lady", team: "white"}],
+        //[{name: "bishop", team: "black"},{name: "pawn", team: "black"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "pawn", team: "white"},{name: "bishop", team: "white"}],
+        //[{name: "horse", team: "black"},{name: "pawn", team: "black"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "pawn", team: "white"},{name: "horse", team: "white"}],
         [{name: "tower", team: "black"},{name: "pawn", team: "black"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "pawn", team: "white"},{name: "towe", team: "white"}]
     ]
     static {
