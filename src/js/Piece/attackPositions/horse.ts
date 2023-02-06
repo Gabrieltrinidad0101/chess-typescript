@@ -4,7 +4,7 @@ import { AnalysisPositions } from "../utils/analysisPositions";
 
 export class Horse{
     analysisPositions: AnalysisPositions = new AnalysisPositions();
-    generateAttackPositionsHorse(pieceInterface: PieceInterface) {
+    generateAttackPositions(pieceInterface: PieceInterface) {
         const positions: pointPositionsType = [
             [{ x: 2, y: 1 }],
             [{ x: 2, y: -1 }],
@@ -15,9 +15,9 @@ export class Horse{
             [{ x: 1, y: -2 }],
             [{ x: -1, y: -2 }],
         ]
-        this.analysisPositions.generateAttckPositions({
-            positions: positions,
+        this.analysisPositions.generateAttckPositions(
+            positions,
             pieceInterface,
-        });
+        );
     }
 }

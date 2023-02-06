@@ -5,7 +5,7 @@ import { AnalysisPositions } from "../utils/analysisPositions";
 export class Rey{
     analysisPositions: AnalysisPositions = new AnalysisPositions();
 
-    generateAttackPositionsRey(pieceInterface: PieceInterface){
+    generateAttackPositions(pieceInterface: PieceInterface){
         const positions: pointPositionsType = [
             [{ x: 1, y: 0 }],
             [{ x: 1, y: -1 }],
@@ -16,9 +16,6 @@ export class Rey{
             [{ x: 0, y: 1 }],
             [{ x: 1, y: 1 }],
         ]
-        this.analysisPositions.generateAttckPositions({
-            positions: positions,
-            pieceInterface: pieceInterface,
-        });
+        this.analysisPositions.generateAttckPositions(positions,pieceInterface);
     }
 }

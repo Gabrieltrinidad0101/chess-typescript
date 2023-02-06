@@ -5,17 +5,27 @@ import { Horse } from "./attackPositions/horse";
 import { Tower } from "./attackPositions/tower";
 import { AnalysisPositions } from "./utils/analysisPositions";
 import { Rey } from "./attackPositions/rey";
+import { Bishop } from "./attackPositions/bishop";
+import { Lady } from "./attackPositions/lady";
+import { Pawn } from "./attackPositions/pawn";
 
 export class PieceLogic {
     horse: Horse= new Horse();
     tower: Tower= new Tower();
     rey: Rey= new Rey();
+    bishop: Bishop = new Bishop();
+    lady: Lady = new Lady();
+    pawn: Pawn = new Pawn();
+        
     analysisPositions: AnalysisPositions = new AnalysisPositions();
 
     actions: Map<string, actionMethodType> = new Map([
-        ["horse", (pieceInterface: PieceInterface) => { this.horse.generateAttackPositionsHorse(pieceInterface) }],
-        ["tower", (pieceInterface: PieceInterface) => { this.tower.generateAttackPositionsTower(pieceInterface) }],
-        ["rey", (pieceInterface: PieceInterface)   => { this.rey.generateAttackPositionsRey(pieceInterface) }]
+        ["horse", (pieceInterface: PieceInterface) => { this.horse.generateAttackPositions(pieceInterface) }],
+        ["tower", (pieceInterface: PieceInterface) => { this.tower.generateAttackPositions(pieceInterface) }],
+        ["rey", (pieceInterface: PieceInterface)   => { this.rey.generateAttackPositions(pieceInterface) }],
+        ["bishop", (pieceInterface: PieceInterface) => { this.bishop.generateAttackPositions(pieceInterface) }],
+        ["lady", (pieceInterface: PieceInterface)   => { this.lady.generateAttackPositions(pieceInterface) }],
+        ["pawn", (pieceInterface: PieceInterface)   => { this.pawn.generateAttackPositions(pieceInterface) }]
     ]);
 
     
@@ -35,6 +45,8 @@ export class PieceLogic {
         const dataChess = DataChess.initial.dataChess;
         pieceFocusCopy.positionX = coordinatesType.x;
         pieceFocusCopy.positionY = coordinatesType.y;
+        pieceFocusCopy.hadMovie = true;
+        const pieceToEat = {...dataChess[coordinatesType.x][coordinatesType.y]};
         dataChess[coordinatesType.x][coordinatesType.y] = pieceFocusCopy as PieceInterface;
         dataChess[pieceFocus.positionX][pieceFocus.positionY] = {
             name: ``,
@@ -42,20 +54,18 @@ export class PieceLogic {
             positionY: pieceFocus.positionY,
             hadMovie: false,
             team: "space",
-            attackPosition: [],
-            canNoMoveToAttackPosition: false,
+            attackPosition: []
         };
+        if(pieceToEat.name === "rey") alert(`lost ${pieceToEat.team}`);
     }
 
     showAttackPosition(pieceInterface: PieceInterface) {
         console.log(DataChess.initial.turn,"   ",pieceInterface.team);
         if(DataChess.initial.turn !== pieceInterface.team) return;
         DataChess.initial.pieceFocus = pieceInterface;
+        console.log(pieceInterface.attackPosition);
         pieceInterface.attackPosition?.forEach((coordinatesType) => {
-            if(pieceInterface.name === "rey"){
-                console.log(DataChess.existAttackPosition(coordinatesType))
-            }
-            if (this.actionShowPoints === undefined || DataChess.existAttackPosition(coordinatesType)) return;
+            if (this.actionShowPoints === undefined) return;
             this.actionShowPoints(coordinatesType)
         })
     }

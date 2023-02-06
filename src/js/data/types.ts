@@ -1,15 +1,24 @@
 import { coordinatesType } from "../Piece/PieceTypes";
 
+type Team = "white" | "black" | "space";
+
 export interface PieceInterface {
     name: string;
     positionX: number;
     positionY: number;
     hadMovie: boolean;
-    team: "white" | "black" | "space";
+    team: Team;
     attackPosition?: Array<coordinatesType>,
 }
 
 export type dataChess = Array<PieceInterface>;
+
+export type BasicPieceInterface = {
+    name: string;
+    team: Team;
+}
+
+
 
 export interface InitialState{
     dataChess: Array<dataChess>,
