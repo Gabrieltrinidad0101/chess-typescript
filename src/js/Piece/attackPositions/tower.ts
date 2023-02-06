@@ -15,7 +15,7 @@ export class Tower{
         ];
         this.analysisPositions.generateLinesAttackPosition({
             pieceInterface,
-            limit: 100,
+            limit: Infinity,
             pieceNoAttack: [pieceInterface.team]
         },positions);
     }
