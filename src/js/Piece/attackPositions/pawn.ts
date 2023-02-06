@@ -8,20 +8,21 @@ export class Pawn {
 
     generateAttackPositions(pieceInterface1: PieceInterface) {
         const direction = pieceInterface1.team === "black" ? 1 : -1;
-        const positions: Array<coordinatesType> = pieceInterface1.hadMovie ? 
+        const positionsMove: pointPositionsType = pieceInterface1.hadMovie ? 
             [{ x: 0, y: 1 * direction}]
          : 
             [{ x: 0, y: 2 * direction },{ x: 0, y: 1 * direction}]
+            const positionsAttack = [{ x: 1 * direction, y: 1 * direction},{ x: -1 * direction, y: 1 * direction}]
         this.analysisPositions.generateLinesAttackPosition({
             pieceInterface: pieceInterface1,
             limit: 2,
             pieceNoAttack: ["black","white"]
-        },positions);
+        },positionsMove);
 
-        // this.analysisPositions.generateAttckPositionsCallBack(positions,pieceInterface1, (coordinatesType:coordinatesType )=>{
-        //     const pieceInterface2 = DataChess.getPieceByPosition(coordinatesType);
-        //     if(pieceInterface2 === undefined || pieceInterface2?.team !== "space") return;
-        //     pieceInterface1.attackPosition?.push(coordinatesType);
-        // });
+        this.analysisPositions.generateAttckPositionsCallBack(positionsAttack,pieceInterface1, (coordinatesType:coordinatesType )=>{
+            const pieceInterface2 = DataChess.getPieceByPosition(coordinatesType);
+            if(pieceInterface2 === undefined || pieceInterface2?.team === "space" || pieceInterface2?.team === pieceInterface1.team ) return;
+            pieceInterface1.attackPosition?.push(coordinatesType);
+        });
     }
 }

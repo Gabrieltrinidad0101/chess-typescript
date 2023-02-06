@@ -11,13 +11,11 @@ export class AnalysisPositions{
     }
 
     public generateAttckPositionsCallBack(positions: pointPositionsType,pieceInterface: PieceInterface,callBack: (coordinatesType: coordinatesType) => void) {
-        positions.forEach(position => {
-            position.forEach(coordinatesType => {
-                callBack({
-                    x: coordinatesType.x + pieceInterface.positionX,
-                    y: coordinatesType.y + pieceInterface.positionY
-                });
-            })
+        positions.forEach(coordinatesType => {
+            callBack({
+                x: coordinatesType.x + pieceInterface.positionX,
+                y: coordinatesType.y + pieceInterface.positionY
+            });
         })
     }
 
@@ -44,9 +42,8 @@ export class AnalysisPositions{
             y: (coordinatesType?.y ?? pieceInterface.positionY) + y,
         };
         const pieceInterface2 = DataChess.getPieceByPosition(coordinatesType1);
-        if (limit === 1 || pieceInterface2 == undefined || pieceInterface2.team === pieceInterface.team) {
+        if (limit === 1 || pieceInterface2 == undefined || pieceNoAttack.includes(pieceInterface2.team))
             return;
-        }
         pieceInterface.attackPosition?.push(coordinatesType1);
         this.getLineOfAttack({...lineOfAttackType,limit: limit - 1,coordinatesType: coordinatesType1 });
     }
