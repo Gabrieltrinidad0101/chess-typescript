@@ -1,6 +1,6 @@
 import { coordinatesType } from "../Piece/PieceTypes";
 
-type Team = "white" | "black" | "space";
+export type Team = "white" | "black" | "space";
 
 export interface PieceInterface {
     name: string;

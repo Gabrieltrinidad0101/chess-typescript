@@ -5,7 +5,7 @@ export interface LinesOfAttackType{
     pieceInterface: PieceInterface, 
     coordinatesType?: coordinatesType,
     limit: number,
-    pieceAttack: Array<Team>
+    pieceNoAttack: Array<Team>
 }
 
 export interface LineOfAttackType extends LinesOfAttackType{
