@@ -1,3 +1,4 @@
+import { DataChess } from "../data/dataChess";
 import { PieceInterface } from "../data/types";
 import { renderTable } from "../Table/createTable";
 import { PieceLogic } from "./PieceLogic";
@@ -30,7 +31,7 @@ export default class Piece{
         const pointPosition = <HTMLElement>document.querySelector(`.position-${coordinatesType.x}-${coordinatesType.y}`)
         pointPosition?.setAttribute("style", "visibility: visible")
         pointPosition?.addEventListener("click",_=>{
-            this.pieceLogic.movePiece(coordinatesType);
+            this.pieceLogic.movePiece(coordinatesType,DataChess.initial.pieceFocus);
             renderTable();
         });
     }

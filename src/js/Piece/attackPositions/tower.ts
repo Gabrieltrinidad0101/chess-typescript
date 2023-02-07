@@ -1,6 +1,5 @@
 import { PieceInterface } from "../../data/types";
-import { coordinatesType, pointPositionsType } from "../PieceTypes";
-import { DataChess } from "../../data/dataChess";
+import { coordinatesType } from "../PieceTypes";
 import { AnalysisPositions } from "../utils/analysisPositions";
 
 export class Tower{
@@ -16,7 +15,8 @@ export class Tower{
         this.analysisPositions.generateLinesAttackPosition({
             pieceInterface,
             limit: Infinity,
-            pieceNoAttack: [pieceInterface.team]
+            pieceNoAttack: [pieceInterface.team],
+            pieceAttack: pieceInterface.team === "black" ? "white" : "black"
         },positions);
     }
 }

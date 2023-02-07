@@ -37,21 +37,31 @@ export class PieceLogic {
         action && action(pieceInterface);
     }
 
-    movePiece(coordinatesType: coordinatesType) {
-        if (!DataChess.initial.pieceFocus) return;
+    private moveCastling(coordinatesType: coordinatesType, pieceInterface: PieceInterface){
+        const tower = this.rey.getPositionBaseOnPieceOfRey(pieceInterface,coordinatesType.castling as "left" || "right");
+        if(!tower) return;
+        const newPositonOfTower = this.analysisPositions.getPositionBaseOnPiece({
+            x: coordinatesType.castling === "left" ? 1 : -1,
+            y: 0
+        },pieceInterface);
+        this.movePiece(newPositonOfTower,tower);    
+    }
+
+    movePiece(coordinatesType: coordinatesType, pieceInterface?: PieceInterface) {
+        if (!pieceInterface) return;
+        const pieceCopy = {...pieceInterface};
+        pieceCopy.positionX = coordinatesType.x;
+        pieceCopy.positionY = coordinatesType.y;
+        if(coordinatesType.castling) this.moveCastling(coordinatesType,pieceCopy);
         DataChess.initial.turn = DataChess.initial.turn === "white" ? "black" : "white"; 
-        const pieceFocus = DataChess.initial.pieceFocus;
-        const pieceFocusCopy = {...DataChess.initial.pieceFocus};
         const dataChess = DataChess.initial.dataChess;
-        pieceFocusCopy.positionX = coordinatesType.x;
-        pieceFocusCopy.positionY = coordinatesType.y;
-        pieceFocusCopy.hadMovie = true;
+        pieceCopy.hadMovie = true;
         const pieceToEat = {...dataChess[coordinatesType.x][coordinatesType.y]};
-        dataChess[coordinatesType.x][coordinatesType.y] = pieceFocusCopy as PieceInterface;
-        dataChess[pieceFocus.positionX][pieceFocus.positionY] = {
+        dataChess[coordinatesType.x][coordinatesType.y] = pieceCopy as PieceInterface;
+        dataChess[pieceInterface.positionX][pieceInterface.positionY] = {
             name: ``,
-            positionX: pieceFocus.positionX,
-            positionY: pieceFocus.positionY,
+            positionX: pieceInterface.positionX,
+            positionY: pieceInterface.positionY,
             hadMovie: false,
             team: "space",
             attackPosition: []

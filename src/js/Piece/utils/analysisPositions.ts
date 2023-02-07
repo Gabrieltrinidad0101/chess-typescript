@@ -10,18 +10,28 @@ export class AnalysisPositions{
         pieceInterface.attackPosition = [];
     }
 
-    public generateAttckPositionsCallBack(positions: pointPositionsType,pieceInterface: PieceInterface,callBack: (coordinatesType: coordinatesType) => void) {
-        positions.forEach(coordinatesType => {
-            callBack({
-                x: coordinatesType.x + pieceInterface.positionX,
-                y: coordinatesType.y + pieceInterface.positionY
-            });
+    public getPositionBaseOnPiece(coordinatesType: coordinatesType,pieceInterface: PieceInterface): coordinatesType{
+        return {
+            x: coordinatesType.x + pieceInterface.positionX,
+            y: coordinatesType.y + pieceInterface.positionY
+        }
+    }
+
+    public getPieceBaseOnPositionPiece(coordinatesType: coordinatesType,pieceInterface: PieceInterface): PieceInterface | void{
+        const coordinatesType2 = this.getPositionBaseOnPiece(coordinatesType,pieceInterface);
+        return DataChess.getPieceByPosition(coordinatesType2);
+    }
+
+    public generateAttckPositionsCallBack(positions: pointPositionsType,pieceInterface1: PieceInterface,callBack: (pieceInterface: PieceInterface | void) => void) {
+        positions.forEach(coordinatesType1 => {
+            const pieceInterface2 = this.getPieceBaseOnPositionPiece(coordinatesType1,pieceInterface1);
+            callBack(pieceInterface2);
         })
     }
 
-    public generateAttckPositions(positions: pointPositionsType,pieceInterface: PieceInterface) {
-        this.generateAttckPositionsCallBack(positions,pieceInterface,coordinatesType=>{
-            this.calculatePointPosition(coordinatesType,pieceInterface);
+    public generateAttckPositions(positions: pointPositionsType,pieceInterface1: PieceInterface) {
+        this.generateAttckPositionsCallBack(positions,pieceInterface1,pieceInterface2=>{
+            this.calculatePointPosition(pieceInterface1,pieceInterface2);
         })
     }
 
@@ -36,7 +46,7 @@ export class AnalysisPositions{
     }
 
     getLineOfAttack(lineOfAttackType: LineOfAttackType) {
-        const {coordinatesType,pieceInterface,x,y,limit,pieceNoAttack}  = lineOfAttackType;
+        const {coordinatesType,pieceInterface,x,y,limit,pieceNoAttack,pieceAttack}  = lineOfAttackType;
         const coordinatesType1 = {
             x: (coordinatesType?.x ?? pieceInterface.positionX) + x,
             y: (coordinatesType?.y ?? pieceInterface.positionY) + y,
@@ -45,12 +55,15 @@ export class AnalysisPositions{
         if (limit === 1 || pieceInterface2 == undefined || pieceNoAttack.includes(pieceInterface2.team))
             return;
         pieceInterface.attackPosition?.push(coordinatesType1);
+        if(pieceInterface2.team == pieceAttack) return;
         this.getLineOfAttack({...lineOfAttackType,limit: limit - 1,coordinatesType: coordinatesType1 });
     }
 
-    private calculatePointPosition(coordinatesType: coordinatesType, pieceInterface1: PieceInterface) {
-        const pieceInterface2 = DataChess.getPieceByPosition(coordinatesType);
-        if (pieceInterface2 && pieceInterface1.team === pieceInterface2.team) return;
-        pieceInterface1.attackPosition?.push(coordinatesType);
+    private calculatePointPosition(pieceInterface1: PieceInterface,pieceInterface2: PieceInterface | void) {
+        if (!pieceInterface2 || pieceInterface1.team === pieceInterface2.team) return;
+        pieceInterface1.attackPosition?.push({
+            x: pieceInterface2.positionX,
+            y: pieceInterface2.positionY,
+        });
     }
 }

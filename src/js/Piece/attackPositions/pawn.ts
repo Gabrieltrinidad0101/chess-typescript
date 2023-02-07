@@ -19,10 +19,12 @@ export class Pawn {
             pieceNoAttack: ["black","white"]
         },positionsMove);
 
-        this.analysisPositions.generateAttckPositionsCallBack(positionsAttack,pieceInterface1, (coordinatesType:coordinatesType )=>{
-            const pieceInterface2 = DataChess.getPieceByPosition(coordinatesType);
+        this.analysisPositions.generateAttckPositionsCallBack(positionsAttack,pieceInterface1, (pieceInterface2: PieceInterface | void )=>{
             if(pieceInterface2 === undefined || pieceInterface2?.team === "space" || pieceInterface2?.team === pieceInterface1.team ) return;
-            pieceInterface1.attackPosition?.push(coordinatesType);
+            pieceInterface1.attackPosition?.push({
+                x: pieceInterface2.positionX,
+                y: pieceInterface2.positionY,
+            });
         });
     }
 }

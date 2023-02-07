@@ -15,7 +15,8 @@ export class Bishop{
         this.analysisPositions.generateLinesAttackPosition({
             pieceInterface:  pieceInterface,
             limit: Infinity,
-            pieceNoAttack: [pieceInterface.team]
+            pieceNoAttack: [pieceInterface.team],
+            pieceAttack: pieceInterface.team === "black" ? "white" : "black"
         },positions);
     }
 }
