@@ -4,7 +4,7 @@ import { actionShowPointsType, actionMethodType, coordinatesType } from "./Piece
 import { Horse } from "./attackPositions/horse";
 import { Tower } from "./attackPositions/tower";
 import { AnalysisPositions } from "./utils/analysisPositions";
-import { Rey } from "./attackPositions/rey";
+import { king } from "./attackPositions/king";
 import { Bishop } from "./attackPositions/bishop";
 import { Lady } from "./attackPositions/lady";
 import { Pawn } from "./attackPositions/pawn";
@@ -12,7 +12,7 @@ import { Pawn } from "./attackPositions/pawn";
 export class PieceLogic {
     horse: Horse= new Horse();
     tower: Tower= new Tower();
-    rey: Rey= new Rey();
+    rey: king= new king();
     bishop: Bishop = new Bishop();
     lady: Lady = new Lady();
     pawn: Pawn = new Pawn();
@@ -22,7 +22,7 @@ export class PieceLogic {
     actions: Map<string, actionMethodType> = new Map([
         ["horse", (pieceInterface: PieceInterface) => { this.horse.generateAttackPositions(pieceInterface) }],
         ["tower", (pieceInterface: PieceInterface) => { this.tower.generateAttackPositions(pieceInterface) }],
-        ["rey", (pieceInterface: PieceInterface)   => { this.rey.generateAttackPositions(pieceInterface) }],
+        ["king", (pieceInterface: PieceInterface)   => { this.rey.generateAttackPositions(pieceInterface) }],
         ["bishop", (pieceInterface: PieceInterface) => { this.bishop.generateAttackPositions(pieceInterface) }],
         ["lady", (pieceInterface: PieceInterface)   => { this.lady.generateAttackPositions(pieceInterface) }],
         ["pawn", (pieceInterface: PieceInterface)   => { this.pawn.generateAttackPositions(pieceInterface) }]
@@ -67,7 +67,7 @@ export class PieceLogic {
             attackPosition: []
         };
         if(pieceCopy.name == "pawn") this.pawn.convertPawnIntoLady(pieceCopy);
-        if(pieceToEat.name === "rey"){
+        if(pieceToEat.name === "king"){
             alert(`lost ${pieceToEat.team}`);
             window.location.href = "/";
         } 

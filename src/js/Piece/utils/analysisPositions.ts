@@ -18,10 +18,11 @@ export class AnalysisPositions{
     }
 
 
-    public getCoordinatesTypeOfPiece(pieceInterface: PieceInterface) : coordinatesType{
+    public getCoordinatesTypeOfPiece(pieceInterface: PieceInterface, castling?: "left" | "right") : coordinatesType{
         return {
             x: pieceInterface.positionX,
-            y: pieceInterface.positionY
+            y: pieceInterface.positionY,
+            castling
         }
     }
 

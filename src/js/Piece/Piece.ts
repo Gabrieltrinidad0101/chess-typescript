@@ -1,11 +1,26 @@
 import { DataChess } from "../data/dataChess";
-import { PieceInterface } from "../data/types";
+import { PieceInterface, pieceName, Team } from "../data/types";
 import { renderTable } from "../Table/createTable";
 import { PieceLogic } from "./PieceLogic";
 import { coordinatesType } from "./PieceTypes";
 export default class Piece{
 
     pieceLogic: PieceLogic;
+    piecesIcon = new Map<`${pieceName}-${Team}`,string>([
+        ["king-black",`&#x265A;`],
+        ["lady-black", `&#x265B;`],
+        ["tower-black", `&#x265C;`],
+        ["bishop-black",`&#x265D;`],
+        ["horse-black",`&#x265E;`],
+        ["pawn-black",`&#x265F;`],
+        ["king-white",`&#x2654;`],
+        ["lady-white", `&#x2655;`],
+        ["tower-white", `&#x2656;`],
+        ["bishop-white",`&#x2657;`],
+        ["horse-white",`&#x2658;`],
+        ["pawn-white",`&#x2659;`],
+
+    ]) 
     constructor(){
         this.pieceLogic = new PieceLogic();
         this.pieceLogic.actionShowPoints = this.showPointsPosition.bind(this);
@@ -15,8 +30,8 @@ export default class Piece{
     renderPiece(piece: PieceInterface): HTMLElement{
         this.pieceLogic.gerenerateAttackPositionsByPiece(piece);
         const divPiece = document.createElement("div");
-        divPiece.className = `pieceHtml color-${this.backgroundColor(piece.positionX, piece.positionY)}`;
-        divPiece.textContent = piece.name;
+        divPiece.className = `team-${piece.team} pieceHtml color-${this.backgroundColor(piece.positionX, piece.positionY)}`;
+        divPiece.innerHTML = this.piecesIcon.get(`${piece.name}-${piece.team}`) ?? "";
         divPiece.addEventListener("click",e=>this.addEvent(e,piece))
         return divPiece;
     }

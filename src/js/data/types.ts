@@ -1,9 +1,9 @@
 import { coordinatesType } from "../Piece/PieceTypes";
 
 export type Team = "white" | "black" | "space";
-
+export type pieceName = "pawn" | "horse" | "tower" | "king" | "lady" | "bishop" | ""
 export interface PieceInterface {
-    name: string;
+    name: pieceName;
     positionX: number;
     positionY: number;
     hadMovie: boolean;
@@ -14,7 +14,7 @@ export interface PieceInterface {
 export type dataChess = Array<PieceInterface>;
 
 export type BasicPieceInterface = {
-    name: string;
+    name: pieceName;
     team: Team;
 }
 
