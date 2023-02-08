@@ -17,6 +17,14 @@ export class AnalysisPositions{
         }
     }
 
+
+    public getCoordinatesTypeOfPiece(pieceInterface: PieceInterface) : coordinatesType{
+        return {
+            x: pieceInterface.positionX,
+            y: pieceInterface.positionY
+        }
+    }
+
     public getPieceBaseOnPositionPiece(coordinatesType: coordinatesType,pieceInterface: PieceInterface): PieceInterface | void{
         const coordinatesType2 = this.getPositionBaseOnPiece(coordinatesType,pieceInterface);
         return DataChess.getPieceByPosition(coordinatesType2);

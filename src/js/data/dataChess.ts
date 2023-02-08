@@ -6,12 +6,12 @@ export class DataChess {
 
     private static chess: Array<Array<BasicPieceInterface>> = [
         [{name: "tower", team: "black"},{name: "pawn", team: "black"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "pawn", team: "white"},{name: "tower", team: "white"}],
-        [{name: "horse", team: "black"},{name: "pawn", team: "white"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "pawn", team: "white"},{name: "horse", team: "white"}],
-        [{name: "bishop", team: "black"},{name: "pawn", team: "black"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "pawn", team: "white"},{name: "bishop", team: "white"}],
+        [{name: "", team: "space"},{name: "pawn", team: "black"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "pawn", team: "white"},{name: "", team: "space"}],
+        [{name: "", team: "space"},{name: "pawn", team: "black"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "pawn", team: "white"},{name: "", team: "space"}],
         [{name: "rey", team: "black"},{name: "pawn", team: "black"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "pawn", team: "white"},{name: "rey", team: "white"}],
-        [{name: "lady", team: "black"},{name: "pawn", team: "black"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "pawn", team: "white"},{name: "lady", team: "white"}],
-        [{name: "bishop", team: "black"},{name: "pawn", team: "black"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "pawn", team: "white"},{name: "bishop", team: "white"}],
-        [{name: "horse", team: "black"},{name: "pawn", team: "black"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "pawn", team: "white"},{name: "horse", team: "white"}],
+        [{name: "", team: "space"},{name: "pawn", team: "black"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "pawn", team: "white"},{name: "", team: "space"}],
+        [{name: "", team: "space"},{name: "pawn", team: "black"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "pawn", team: "white"},{name: "", team: "space"}],
+        [{name: "", team: "space"},{name: "pawn", team: "black"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "pawn", team: "white"},{name: "", team: "space"}],
         [{name: "tower", team: "black"},{name: "pawn", team: "black"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "", team: "space"},{name: "pawn", team: "white"},{name: "tower", team: "white"}]
     ];
 
@@ -33,7 +33,7 @@ export class DataChess {
             }
             dataChess.push(row);
         }
-        this.initial = { dataChess, turn: "white" };
+        this.initial = { dataChess, turn: "black" };
     }
 
 
@@ -48,9 +48,6 @@ export class DataChess {
         for(const row of this.initial.dataChess){
             for(const pieceInterface2 of row ){
                 for(const coordinatesType of pieceInterface2.attackPosition ?? []){
-                    if(pieceInterface2.name === "lady" && coordinatesType.x === 1 && coordinatesType.y === 7){
-                        console.log(coordinatesType,"   ",coordinatesType1.x," ",coordinatesType1.y)
-                    }
                     if(coordinatesType.x === coordinatesType1.x && 
                     coordinatesType.y === coordinatesType1.y &&
                     pieceInterface1.team !== pieceInterface2.team) return true;

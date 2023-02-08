@@ -18,6 +18,7 @@ export class Rey{
             { x: 1, y: 1 },
         ]
         this.analysisPositions.generateAttckPositions(positions,pieceInterface);
+
         if(pieceInterface.hadMovie) return;
         
         const castlingLeft: pointPositionsType = [
@@ -51,26 +52,21 @@ export class Rey{
     }
 
     castling(positions: pointPositionsType,pieceInterface: PieceInterface){
+        let positionsAttack: pointPositionsType  = [];
         let isAttackPosition = false;
         this.analysisPositions.generateAttckPositionsCallBack(positions,pieceInterface,(pieceInterface2:PieceInterface | void)=>{
-            if(!pieceInterface2 ||isAttackPosition) return;
-            isAttackPosition = DataChess.getPositionsOfAttack(pieceInterface,{
-                x: pieceInterface2.positionX,
-                y: pieceInterface2.positionY
-            }) || 
-            (pieceInterface2?.team !== "space");
-            console.log(isAttackPosition)
+            if(!pieceInterface2 || isAttackPosition){
+                positionsAttack = [];
+                return;
+            }
+            const coordinatesType = this.analysisPositions.getCoordinatesTypeOfPiece(pieceInterface2);
+            isAttackPosition = DataChess.getPositionsOfAttack(pieceInterface,coordinatesType) || 
+            pieceInterface2?.team !== "space";
+            debugger
+            positionsAttack.push(coordinatesType);
         });
-        if(isAttackPosition) return;
-        positions.shift();
-        this.analysisPositions.generateAttckPositionsCallBack(positions,pieceInterface,(pieceInterface2:PieceInterface | void) => {
-            if(!pieceInterface2) return;
-            pieceInterface.attackPosition?.push({
-                x: pieceInterface2.positionX,
-                y: pieceInterface2.positionY,
-                castling: positions[0].castling
-            })
-        });
+        positionsAttack.shift();
+        pieceInterface.attackPosition?.concat(positionsAttack)
     }
 
 }
