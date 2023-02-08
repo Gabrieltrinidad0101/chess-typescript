@@ -1,6 +1,6 @@
 import { DataChess } from "../../data/dataChess";
 import { PieceInterface } from "../../data/types";
-import { coordinatesType, pointPositionsType } from "../PieceTypes";
+import { pointPositionsType } from "../PieceTypes";
 import { AnalysisPositions } from "../utils/analysisPositions";
 
 export class Pawn {
