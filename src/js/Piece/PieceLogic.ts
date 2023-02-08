@@ -66,7 +66,11 @@ export class PieceLogic {
             team: "space",
             attackPosition: []
         };
-        if(pieceToEat.name === "rey") alert(`lost ${pieceToEat.team}`);
+        if(pieceCopy.name == "pawn") this.pawn.convertPawnIntoLady(pieceCopy);
+        if(pieceToEat.name === "rey"){
+            alert(`lost ${pieceToEat.team}`);
+            window.location.href = "/";
+        } 
     }
 
     showAttackPosition(pieceInterface: PieceInterface) {

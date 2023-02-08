@@ -53,12 +53,13 @@ export class Rey{
     castling(positions: pointPositionsType,pieceInterface: PieceInterface){
         let isAttackPosition = false;
         this.analysisPositions.generateAttckPositionsCallBack(positions,pieceInterface,(pieceInterface2:PieceInterface | void)=>{
-            if(isAttackPosition) return;
+            if(!pieceInterface2 ||isAttackPosition) return;
             isAttackPosition = DataChess.getPositionsOfAttack(pieceInterface,{
-                x: pieceInterface.positionX,
-                y: pieceInterface.positionY
+                x: pieceInterface2.positionX,
+                y: pieceInterface2.positionY
             }) || 
             (pieceInterface2?.team !== "space");
+            console.log(isAttackPosition)
         });
         if(isAttackPosition) return;
         positions.shift();
