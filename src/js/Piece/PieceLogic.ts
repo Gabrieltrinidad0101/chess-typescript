@@ -45,6 +45,7 @@ export class PieceLogic {
             y: 0
         },pieceInterface);
         this.movePiece(newPositonOfTower,tower);    
+        DataChess.initial.turn = DataChess.initial.turn === "white" ? "black" : "white";
     }
 
     movePiece(coordinatesType: coordinatesType, pieceInterface?: PieceInterface) {
@@ -52,8 +53,8 @@ export class PieceLogic {
         const pieceCopy = {...pieceInterface};
         pieceCopy.positionX = coordinatesType.x;
         pieceCopy.positionY = coordinatesType.y;
+        DataChess.initial.turn = DataChess.initial.turn === "white" ? "black" : "white";
         if(coordinatesType.castling) this.moveCastling(coordinatesType,pieceCopy);
-        DataChess.initial.turn = DataChess.initial.turn === "white" ? "black" : "white"; 
         const dataChess = DataChess.initial.dataChess;
         pieceCopy.hadMovie = true;
         const pieceToEat = {...dataChess[coordinatesType.x][coordinatesType.y]};
@@ -74,10 +75,8 @@ export class PieceLogic {
     }
 
     showAttackPosition(pieceInterface: PieceInterface) {
-        console.log(DataChess.initial.turn,"   ",pieceInterface.team);
         if(DataChess.initial.turn !== pieceInterface.team) return;
         DataChess.initial.pieceFocus = pieceInterface;
-        console.log(pieceInterface.attackPosition);
         pieceInterface.attackPosition?.forEach((coordinatesType) => {
             if (this.actionShowPoints === undefined) return;
             this.actionShowPoints(coordinatesType)

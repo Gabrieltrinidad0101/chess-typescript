@@ -29,7 +29,6 @@ export class Pawn {
     }
 
     convertPawnIntoLady(pieceInterface: PieceInterface): void {
-        debugger;
         const positionToConvertPawnIntoLady = pieceInterface.team == "black" ? 7 : 0;
         if(pieceInterface.positionY !== positionToConvertPawnIntoLady) return;
         DataChess.initial.dataChess[pieceInterface.positionX][pieceInterface.positionY] = {
