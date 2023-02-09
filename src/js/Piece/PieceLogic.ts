@@ -70,7 +70,7 @@ export class PieceLogic {
         if(pieceCopy.name == "pawn") this.pawn.convertPawnIntoLady(pieceCopy);
         if(pieceToEat.name === "king"){
             alert(`lost ${pieceToEat.team}`);
-            window.location.href = "/";
+            window.location.reload();
         } 
     }
 
